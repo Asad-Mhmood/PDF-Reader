@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Reader</title>
+    <title>PDF Reader - Chat</title>
     <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>PDF Reader</h1>
-        <p>Welcome to PDF Reader</p>
+        <p>Welcome to the PDF Reader. Upload a PDF and start asking questions.</p>
 
         <!-- PDF Upload Form -->
         <form id="uploadForm" enctype="multipart/form-data">
@@ -18,12 +18,14 @@
         </form>
         <p id="uploadMessage"></p>
 
-        <!-- Q&A Section -->
-        <form id="questionForm">
-            <input type="text" id="questionInput" placeholder="Ask a question about the PDF..." required>
-            <button type="submit">Ask</button>
-        </form>
-        <p id="answer"></p>
+        <!-- Chat Section -->
+        <div id="chatContainer">
+            <div id="chatHistory"></div>
+            <form id="questionForm">
+                <input type="text" id="questionInput" placeholder="Ask a question..." required>
+                <button type="submit">Ask</button>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -54,7 +56,13 @@
             });
 
             let result = await response.json();
-            document.getElementById("answer").textContent = result.answer;
+
+            let chatHistory = document.getElementById("chatHistory");
+            let newMessage = document.createElement("p");
+            newMessage.innerHTML = `<b>You:</b> ${questionInput.value}<br><b>Bot:</b> ${result.answer}`;
+            chatHistory.appendChild(newMessage);
+
+            questionInput.value = "";
         };
     </script>
 </body>
