@@ -97,6 +97,7 @@ http://127.0.0.1:8000/
 ├── 📂 templates/        # HTML templates
 ├── 📂 uploaded_files/   # Stores uploaded PDFs
 └── 📄 requirements.txt  # Dependencies
+└── 📄 .env              # API key
 ```
 
 ## Dependencies
